@@ -1,0 +1,77 @@
+Question No. 3) Suppose you have 2 tables as below
+I. Employee(EmpNo(PK), Ename, Job, MGR, Hiredate, Salary, DeptNo)                                                                                                                                                     II. Department(DeptNo(PK), Dname, Location)                                                                                  
+Write a query that shows department name and total number of employees in each department with the format as DEPTPARTMENT NAME:NUMBER OF EMPLOYEE
+
+
+mysql> create table Employee(EmpNo int(10) primary key,Ename char(20),Job char(20),MGR char(20),Hiredate Date,Saalary int(20),DeptNo int(20));
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> desc Employee;
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| EmpNo    | int(10)  | NO   | PRI |         |       |
+| Ename    | char(20) | YES  |     | NULL    |       |
+| Job      | char(20) | YES  |     | NULL    |       |
+| MGR      | char(20) | YES  |     | NULL    |       |
+| Hiredate | date     | YES  |     | NULL    |       |
+| Saalary  | int(20)  | YES  |     | NULL    |       |
+| DeptNo   | int(20)  | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
+
+mysql> create table Department(DeptNo int(20) primary key,Dname char(50),Locatio
+n char(20));
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> insert into Department values(4,"Travel","Chennai");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from Department;
++--------+-----------+----------+
+| DeptNo | Dname     | Location |
++--------+-----------+----------+
+|      1 | DLostData | Banglore |
+|      2 | DBank     | Pune     |
+|      3 | Recover   | Banglore |
+|      4 | Travel    | Chennai  |
++--------+-----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select
+    ->    Dname as DEPTPARTMENTNAME,
+    ->    count(emp.EmpNo) as NUMBEROFEMPLOYEE
+    ->    from department dept inner join employee emp
+    ->    on dept.DeptNo = emp.DeptNo
+    ->    group by dept.DeptNo;
++------------------+------------------+
+| DEPTPARTMENTNAME | NUMBEROFEMPLOYEE |
++------------------+------------------+
+| DLostData        |                1 |
+| DBank            |                3 |
++------------------+------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee;
++-------+--------+---------------+------+------------+---------+--------+
+| EmpNo | Ename  | Job           | MGR  | Hiredate   | Saalary | DeptNo |
++-------+--------+---------------+------+------------+---------+--------+
+|     1 | VSAU   | Developer     | XYZ  | 1990-05-12 |    5000 |      2 |
+|     2 | VSAU   | Developer     | XYZ  | 1990-05-12 |    5000 |      2 |
+|     3 | Shirsh | Developer     | XYZ  | 1990-05-12 |    5000 |      2 |
+|     4 | sagar  | .NETDeveloper | XYZ  | 1990-05-12 |    5000 |      1 |
++-------+--------+---------------+------+------------+---------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from department;
++--------+-----------+----------+
+| DeptNo | Dname     | Location |
++--------+-----------+----------+
+|      1 | DLostData | Banglore |
+|      2 | DBank     | Pune     |
+|      3 | Recover   | Banglore |
+|      4 | Travel    | Chennai  |
++--------+-----------+----------+
+4 rows in set (0.00 sec)
+
+mysql>
+
