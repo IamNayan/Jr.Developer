@@ -1,0 +1,27 @@
+/*Question No. 2) Write a function which will returns the maximum number of words in a sentence. Given text can be divided into sentences by splitting it at dots, question marks and exclamation marks. For example, given S= "We test coders. Give us a try?", the function should return 4.*/
+
+public class WordC {
+	public static void main(String[] args) 
+		{
+		// TODO Auto-generated method stub
+	        String sentence="We test coders.Give us a try?";
+	        int countwords=0;
+	        int maxwords =0;
+	        int i=0;
+	        while(i<sentence.length()){
+	         if(sentence.charAt(i) == ' ')
+		{
+	        	 countwords++;
+	         	}else if(sentence.charAt(i)== '.' || sentence.charAt(i) == '?'  ||                           sentence.charAt(i)== '!'){
+	        	 countwords++;
+	            if(countwords > maxwords){
+	                maxwords= countwords;
+	            }
+	            countwords=0;
+	          }
+	          i++;
+	        }	      
+	        System.out.println(maxwords);
+	}
+}
+
